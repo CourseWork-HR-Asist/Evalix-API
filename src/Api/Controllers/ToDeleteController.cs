@@ -6,7 +6,7 @@ namespace Api.Controllers
     [ApiController]
     public class ToDeleteController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("[action]")]
         public IActionResult TestMethod()
         {
             return Ok("Test");

@@ -1,8 +1,18 @@
+using Api.Modules;
 using Api.Modules.RouteFiltering;
+using Application;
+using Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
+
 
 builder.Services.AddOpenApi();
 
@@ -23,6 +33,8 @@ if (app.Environment.IsDevelopment())
         options.Theme = ScalarTheme.DeepSpace;
     });
 }
+
+await app.InitialiseDb();
 
 app.MapControllers();
 

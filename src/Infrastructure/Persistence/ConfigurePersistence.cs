@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Application.Common.Interfaces.Queries;
+using Application.Common.Interfaces.Repositories;
+using Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +27,41 @@ public static class ConfigurePersistence
                 .ConfigureWarnings(w => w.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning)));
 
         services.AddScoped<ApplicationDbContextInitializer>();
-        //services.AddRepositories();
+        services.AddRepositories();
+    }
+
+    private static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<UserRepository>();
+        services.AddScoped<IUserRepository>(provider => provider.GetRequiredService<UserRepository>());
+        services.AddScoped<IUserQueries>(provider => provider.GetRequiredService<UserRepository>());
+
+        services.AddScoped<RoleRepository>();
+        services.AddScoped<IRoleRepository>(provider => provider.GetRequiredService<RoleRepository>());
+        services.AddScoped<IRoleQueries>(provider => provider.GetRequiredService<RoleRepository>());
+
+        services.AddScoped<SkillRepository>();
+        services.AddScoped<ISkillRepository>(provider => provider.GetRequiredService<SkillRepository>());
+        services.AddScoped<ISkillQueries>(provider => provider.GetRequiredService<SkillRepository>());
+
+        services.AddScoped<StatusRepository>();
+        services.AddScoped<IStatusRepository>(provider => provider.GetRequiredService<StatusRepository>());
+        services.AddScoped<IStatusQueries>(provider => provider.GetRequiredService<StatusRepository>());
+
+        services.AddScoped<VacancyRepository>();
+        services.AddScoped<IVacancyRepository>(provider => provider.GetRequiredService<VacancyRepository>());
+        services.AddScoped<IVacancyQueries>(provider => provider.GetRequiredService<VacancyRepository>());
+
+        services.AddScoped<VacancySkillRepository>();
+        services.AddScoped<IVacancySkillRepository>(provider => provider.GetRequiredService<VacancySkillRepository>());
+        services.AddScoped<IVacancySkillQueries>(provider => provider.GetRequiredService<VacancySkillRepository>());
+
+        services.AddScoped<ResumeRepository>();
+        services.AddScoped<IResumeRepository>(provider => provider.GetRequiredService<ResumeRepository>());
+        services.AddScoped<IResumeQueries>(provider => provider.GetRequiredService<ResumeRepository>());
+
+        services.AddScoped<EvaluationRepository>();
+        services.AddScoped<IEvaluationRepository>(provider => provider.GetRequiredService<EvaluationRepository>());
+        services.AddScoped<IEvaluationQueries>(provider => provider.GetRequiredService<EvaluationRepository>());
     }
 }

@@ -12,16 +12,16 @@ public class User
     public RoleId RoleId { get; private set; }
     public Role? Role { get; }
 
-    private User(UserId id, string firstName, string email, string password, RoleId roleId)
+    private User(UserId id, string firstName, string email, string passwordHash, RoleId roleId)
     {
         Id = id;
         FirstName = firstName;
         UpdatedAt = DateTime.UtcNow;
         Email = email;
-        PasswordHash = password;
+        PasswordHash = passwordHash;
         RoleId = roleId;
-
     }
+
 
     public static User New(UserId id, string firstName, string email,
         string password, RoleId roleId)

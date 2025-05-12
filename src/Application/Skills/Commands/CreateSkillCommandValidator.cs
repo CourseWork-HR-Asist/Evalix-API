@@ -8,7 +8,7 @@ public class CreateSkillCommandValidator: AbstractValidator<CreateSkillCommand>
     {
         RuleFor(v => v.Title)
             .MaximumLength(200)
-            .MinimumLength(3)
+            .MinimumLength(1)
             .NotEmpty();
     }
 }

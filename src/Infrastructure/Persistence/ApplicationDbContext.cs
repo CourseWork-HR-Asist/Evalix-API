@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Domain.Evaluations;
+using Domain.RefreshTokens;
 using Domain.Resumes;
 using Domain.Roles;
 using Domain.Skills;
@@ -15,6 +16,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Status> Statuses { get; set; }
     public DbSet<Skill> Skills { get; set; }
     public DbSet<Vacancy> Vacancies { get; set; }

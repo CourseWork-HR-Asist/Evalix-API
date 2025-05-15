@@ -81,6 +81,8 @@ await app.InitialiseDb();
 
 app.MapControllers();
 
+app.UseCors("AllowOrigin");
+
 app.UseHttpsRedirection();
 
 await app.RunAsync();

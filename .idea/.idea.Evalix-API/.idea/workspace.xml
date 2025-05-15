@@ -8,11 +8,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc5436f-c3bf-4bde-acd6-e5e238f00680" name="Changes" comment="" />
+    <list default="true" id="bdc5436f-c3bf-4bde-acd6-e5e238f00680" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Users/Commands/UserLoginWithGoogleCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Users/Commands/UserLoginWithGoogleCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/VacancySkillConfigurator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/VacancySkillConfigurator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="autoShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,6 +54,9 @@
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ],
     "rider.external.source.directories": [
       "C:\\Users\\Роман Давидюк\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
       "C:\\Users\\Роман Давидюк\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
@@ -96,6 +109,11 @@
       <workItem from="1746787014415" duration="702000" />
       <workItem from="1747027181294" duration="289000" />
       <workItem from="1747163219453" duration="2230000" />
+      <workItem from="1747239345088" duration="3424000" />
+      <workItem from="1747248859653" duration="24000" />
+      <workItem from="1747294702895" duration="1833000" />
+      <workItem from="1747298595765" duration="329000" />
+      <workItem from="1747298964887" duration="1789000" />
     </task>
     <servers />
   </component>

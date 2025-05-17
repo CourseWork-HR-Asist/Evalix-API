@@ -9,12 +9,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdc5436f-c3bf-4bde-acd6-e5e238f00680" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/dataSources/8bcf56ed-9271-4922-8f09-7bdb74b955b8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/dataSources/8bcf56ed-9271-4922-8f09-7bdb74b955b8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Users/Commands/UserLoginWithGoogleCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Users/Commands/UserLoginWithGoogleCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/VacancySkillConfigurator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/VacancySkillConfigurator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/Controllers/SkillController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Controllers/SkillController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Skills/Commands/UpdateSkillCommandValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Skills/Commands/UpdateSkillCommandValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Users/Commands/UserLoginWithGoogleCommand.cs~" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +27,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/76803a04e31b4fee99d90bcbfc5a6bdde8e930/77/65e5172b/IReadOnlyList`1.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -44,7 +48,7 @@
     ".NET Launch Settings Profile.Api: http.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "authentication",
+    "git-widget-placeholder": "vacancy",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -120,6 +124,7 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

@@ -2,6 +2,7 @@
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Users.Commands;
+using Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,8 +20,23 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
 
         return entities.Select(UserDto.FromDomainModel).ToList();
     }
-
     
+    [HttpGet("[action]/{id:guid}")] 
+    public async Task<ActionResult<UserDto>> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        var entity = await userQueries.GetById(new UserId(id), cancellationToken);
+        
+        return entity.Match<ActionResult<UserDto>>(u => UserDto.FromDomainModel(u), () => NotFound());
+    }
+    
+    [HttpGet("[action]")]
+    public async Task<ActionResult<UserDto>> GetByEmail([FromQuery] string email, CancellationToken cancellationToken)
+    {
+        var entity = await userQueries.SearchByEmail(email, cancellationToken);
+
+        return entity.Match<ActionResult<UserDto>>(u => Ok(UserDto.FromDomainModel(u)), () => NotFound());
+    }
+
     [HttpPost("google-auth/[action]")]
     public async Task<ActionResult<TokenDto>> LoginWithGoogle([FromBody] GoogleLoginRequest request, CancellationToken cancellationToken)
     {
@@ -44,5 +60,18 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
                 return Ok(new TokenDto(u.Token));
             },
             e => e.ToObjectResult());
+    }
+    
+    [HttpDelete("[action]/{id:guid}")]
+    public async Task<ActionResult<UserDto>> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        var input = new UserDeleteCommand
+        {
+            UserId = id
+        };
+        
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<UserDto>>(u => UserDto.FromDomainModel(u), e => e.ToObjectResult());
     }
 }

@@ -9,12 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdc5436f-c3bf-4bde-acd6-e5e238f00680" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/dataSources/8bcf56ed-9271-4922-8f09-7bdb74b955b8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/dataSources/8bcf56ed-9271-4922-8f09-7bdb74b955b8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/Controllers/SkillController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Controllers/SkillController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Api/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Skills/Commands/UpdateSkillCommandValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Skills/Commands/UpdateSkillCommandValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Users/Commands/UserLoginWithGoogleCommand.cs~" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Repositories/UserRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

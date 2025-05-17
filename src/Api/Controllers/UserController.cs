@@ -37,7 +37,7 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
         return entity.Match<ActionResult<UserDto>>(u => Ok(UserDto.FromDomainModel(u)), () => NotFound());
     }
 
-    [HttpPost("google-auth/[action]")]
+    [HttpPost("[action]")]
     public async Task<ActionResult<TokenDto>> LoginWithGoogle([FromBody] GoogleLoginRequest request, CancellationToken cancellationToken)
     {
         var input = new UserLoginWithGoogleCommand

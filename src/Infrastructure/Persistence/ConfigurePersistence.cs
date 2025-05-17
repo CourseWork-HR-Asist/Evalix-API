@@ -1,6 +1,8 @@
-﻿using Application.Common.Interfaces.Queries;
+﻿using Application.Common.Interfaces;
+using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Infrastructure.Persistence.Repositories;
+using Infrastructure.Persistence.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +30,7 @@ public static class ConfigurePersistence
 
         services.AddScoped<ApplicationDbContextInitializer>();
         services.AddRepositories();
+        services.AddServices();
     }
 
     private static void AddRepositories(this IServiceCollection services)
@@ -63,5 +66,12 @@ public static class ConfigurePersistence
         services.AddScoped<EvaluationRepository>();
         services.AddScoped<IEvaluationRepository>(provider => provider.GetRequiredService<EvaluationRepository>());
         services.AddScoped<IEvaluationQueries>(provider => provider.GetRequiredService<EvaluationRepository>());
+        
+        services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+    }
+    
+    private static void AddServices(this IServiceCollection services)
+    {
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
     }
 }

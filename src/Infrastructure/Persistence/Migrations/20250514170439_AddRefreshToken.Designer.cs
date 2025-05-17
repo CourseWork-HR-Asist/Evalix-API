@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514170439_AddRefreshToken")]
+    partial class AddRefreshToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,6 +287,10 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("vacancy_id");
 
+                    b.Property<Guid?>("VacancyId1")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vacancy_id1");
+
                     b.HasKey("Id")
                         .HasName("pk_vacancy_skills");
 
@@ -292,6 +299,9 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.HasIndex("VacancyId")
                         .HasDatabaseName("ix_vacancy_skills_vacancy_id");
+
+                    b.HasIndex("VacancyId1")
+                        .HasDatabaseName("ix_vacancy_skills_vacancy_id1");
 
                     b.ToTable("vacancy_skills", (string)null);
                 });
@@ -372,11 +382,16 @@ namespace Infrastructure.Persistence.Migrations
                         .HasConstraintName("fk_vacancy_skills_skill_id");
 
                     b.HasOne("Domain.Vacancies.Vacancy", "Vacancy")
-                        .WithMany("VacancySkills")
+                        .WithMany()
                         .HasForeignKey("VacancyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_vacancy_skills_vacancy_id");
+
+                    b.HasOne("Domain.Vacancies.Vacancy", null)
+                        .WithMany("VacancySkills")
+                        .HasForeignKey("VacancyId1")
+                        .HasConstraintName("fk_vacancy_skills_vacancies_vacancy_id1");
 
                     b.Navigation("Skill");
 

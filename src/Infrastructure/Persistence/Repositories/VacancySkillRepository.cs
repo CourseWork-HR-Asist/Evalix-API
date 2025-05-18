@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
+using Domain.Skills;
 using Domain.Vacancies;
 using Domain.VacancySkills;
 using Microsoft.EntityFrameworkCore;
@@ -51,5 +52,14 @@ public class VacancySkillRepository(ApplicationDbContext context): IVacancySkill
             .ToListAsync(cancellationToken);
         
         return entity;
+    }
+
+    public async Task<Option<VacancySkill>> GetByVacancyIdAndSkillId(VacancyId vacancyId, SkillId skillId, CancellationToken cancellationToken)
+    {
+        var entity = await context.VacancySkills
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.VacancyId == vacancyId && x.SkillId == skillId, cancellationToken);
+        
+        return entity == null ? Option.None<VacancySkill>() : Option.Some(entity);
     }
 }

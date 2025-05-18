@@ -32,7 +32,7 @@ public class VacancyConfigurator: IEntityTypeConfiguration<Vacancy>
             .WithOne(x => x.Vacancy)
             .HasForeignKey(x => x.VacancyId)
             .HasConstraintName("fk_vacancy_skills_vacancy_id")
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.HasMany(x => x.Evaluations)
             .WithOne(x => x.Vacancy)

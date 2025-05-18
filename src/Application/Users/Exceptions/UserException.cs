@@ -1,7 +1,6 @@
-﻿﻿using Domain.Roles;
+﻿using Domain.Roles;
 using Domain.Users;
-
-
+ 
 namespace Application.Users.Exceptions;
 
 public class UserException(UserId id, string message, Exception? innerException = null)

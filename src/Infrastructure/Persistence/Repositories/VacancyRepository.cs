@@ -39,13 +39,19 @@ public class VacancyRepository(ApplicationDbContext context): IVacancyRepository
     {
         return await context.Vacancies
             .AsNoTracking()
+            .Include(x => x.Recruiter)
+            .Include(x => x.VacancySkills)
+                .ThenInclude(s => s.Skill)
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Option<Vacancy>> Get(VacancyId id, CancellationToken cancellationToken)
+    public async Task<Option<Vacancy>> GetById(VacancyId id, CancellationToken cancellationToken)
     {
         var entity = await context.Vacancies
             .AsNoTracking()
+            .Include(x => x.Recruiter)
+            .Include(x => x.VacancySkills)
+                .ThenInclude(s => s.Skill)
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         return entity == null ? Option.None<Vacancy>() : Option.Some(entity);
@@ -55,6 +61,9 @@ public class VacancyRepository(ApplicationDbContext context): IVacancyRepository
     {
         var entity = await context.Vacancies
             .AsNoTracking()
+            .Include(x => x.Recruiter)
+            .Include(x => x.VacancySkills)
+                .ThenInclude(s => s.Skill)
             .FirstOrDefaultAsync(x => x.Title == title, cancellationToken);
 
         return entity == null ? Option.None<Vacancy>() : Option.Some(entity);

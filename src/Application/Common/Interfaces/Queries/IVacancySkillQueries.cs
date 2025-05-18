@@ -1,4 +1,5 @@
-﻿using Domain.Vacancies;
+﻿using Domain.Skills;
+using Domain.Vacancies;
 using Domain.VacancySkills;
 using Optional;
 
@@ -9,4 +10,5 @@ public interface IVacancySkillQueries
     Task<IReadOnlyList<VacancySkill>> GetAll(CancellationToken cancellationToken);
     Task<Option<VacancySkill>> GetById (VacancySkillId id, CancellationToken cancellationToken);
     Task<IReadOnlyList<VacancySkill>> GetByVacancyId(VacancyId id, CancellationToken cancellationToken);
+    Task<Option<VacancySkill>> GetByVacancyIdAndSkillId(VacancyId vacancyId, SkillId skillId, CancellationToken cancellationToken);
 }

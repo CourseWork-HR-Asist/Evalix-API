@@ -42,8 +42,8 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
 
         return result.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), e => e.ToObjectResult());
     }
-    
-    [HttpPut("[action]/{skillid:guid}")] 
+
+    [HttpPut("[action]/{skillid:guid}")]
     public async Task<ActionResult<SkillDto>> Update([FromRoute] Guid skillid, [FromBody] SkillUpdateDto request, CancellationToken cancellationToken)
     {
         var input = new UpdateSkillCommand
@@ -53,9 +53,10 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
         };
 
         var result = await sender.Send(input, cancellationToken);
-        
+
         return result.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), e => e.ToObjectResult());
     }
+vacancy
     
     [HttpDelete("[action]/{skillid:guid}")] 
     public async Task<ActionResult<SkillDto>> Delete([FromRoute] Guid skillId, CancellationToken cancellationToken)
@@ -64,9 +65,9 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
         {
             SkillId = skillId
         };
-        
+
         var result = await sender.Send(input, cancellationToken);
-        
+
         return result.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), e => e.ToObjectResult());
     }
 }

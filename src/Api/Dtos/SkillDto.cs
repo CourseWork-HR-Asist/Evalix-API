@@ -19,5 +19,5 @@ public record SkillDto(
 
 public record SkillUpdateDto(Guid id, string? Title)
 {
-    public static RoleUpdateDto FromDomainModel(Skill role) => new(role.Id.Value, role.Title);
+    public static RoleUpdateDto FromDomainModel(Skill skill) => new(skill.Id.Value, skill.Title);
 }

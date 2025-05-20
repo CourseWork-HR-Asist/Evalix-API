@@ -9,7 +9,7 @@ public class UpdateSkillCommandValidator: AbstractValidator<UpdateSkillCommand>
         RuleFor(x => x.SkillId).NotEmpty();
         RuleFor(x => x.Title)
             .NotEmpty()
-            .MinimumLength(3)
+            .MinimumLength(1)
             .MaximumLength(200);
     }
 }

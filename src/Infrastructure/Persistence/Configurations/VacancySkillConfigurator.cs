@@ -17,7 +17,7 @@ public class VacancySkillConfigurator: IEntityTypeConfiguration<VacancySkill>
             .WithMany(x => x.VacancySkills)
             .HasForeignKey(x => x.VacancyId)
             .HasConstraintName("fk_vacancy_skills_vacancy_id")
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.HasOne(x => x.Skill)
             .WithMany()

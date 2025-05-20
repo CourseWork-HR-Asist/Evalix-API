@@ -12,6 +12,7 @@ public class UserRepository(ApplicationDbContext context): IUserRepository, IUse
     {
         return await context.Users
             .AsNoTracking()
+            .Include(x => x.Role)
             .ToListAsync(cancellationToken);
     }
 
@@ -39,6 +40,7 @@ public class UserRepository(ApplicationDbContext context): IUserRepository, IUse
     {
         var entity = await context.Users
             .AsNoTracking()
+            .Include(x => x.Role)
             .FirstOrDefaultAsync(x => x.FirstName == userName, cancellationToken);
 
         return entity == null ? Option.None<User>() : Option.Some(entity);

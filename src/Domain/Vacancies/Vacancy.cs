@@ -17,7 +17,7 @@ public class Vacancy
     public ICollection<Evaluation> Evaluations { get; } = [];
     public DateTime CreatedAt { get; private set; }
     
-    private Vacancy(VacancyId id, string title, string description, UserId recruiterId, string experience, string education, DateTime createdAt)
+    private Vacancy(VacancyId id, string title, string description, UserId recruiterId, string experience, string education)
     {
         Id = id;
         Title = title;
@@ -25,12 +25,12 @@ public class Vacancy
         RecruiterId = recruiterId;
         Experience = experience;
         Education = education;
-        CreatedAt = createdAt;
+        CreatedAt = DateTime.UtcNow;
     }
 
     
-    public static Vacancy Create(VacancyId id, string title, string description, UserId recruiterId, string experience, string education, DateTime createdAt)
-        => new(id, title, description, recruiterId, experience, education, createdAt);
+    public static Vacancy New(VacancyId id, string title, string description, UserId recruiterId, string experience, string education)
+        => new(id, title, description, recruiterId, experience, education);
     
     public void UpdateDetails(string title, string description, string requiredExperience, string requiredEducation)
     {

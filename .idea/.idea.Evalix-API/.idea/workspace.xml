@@ -10,11 +10,16 @@
   <component name="ChangeListManager">
     <list default="true" id="bdc5436f-c3bf-4bde-acd6-e5e238f00680" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Evalix-API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Users/Commands/UserLoginWithGoogleCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Users/Commands/UserLoginWithGoogleCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/Dtos/SkillDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Dtos/SkillDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/Queries/IVacancyQueries.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/Queries/IVacancyQueries.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/Queries/IVacancySkillQueries.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/Queries/IVacancySkillQueries.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Users/Exceptions/UserException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Users/Exceptions/UserException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Vacancies/Vacancy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Vacancies/Vacancy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/VacancyConfigurator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/VacancyConfigurator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/VacancySkillConfigurator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/VacancySkillConfigurator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Repositories/VacancyRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Repositories/VacancyRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Repositories/VacancySkillRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Repositories/VacancySkillRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +32,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/76803a04e31b4fee99d90bcbfc5a6bdde8e930/77/65e5172b/IReadOnlyList`1.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -44,13 +53,13 @@
     ".NET Launch Settings Profile.Api: http.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "authentication",
+    "git-widget-placeholder": "vacancy",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "dotNetConsole",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -114,14 +123,51 @@
       <workItem from="1747294702895" duration="1833000" />
       <workItem from="1747298595765" duration="329000" />
       <workItem from="1747298964887" duration="1789000" />
+      <workItem from="1747489680872" duration="5882000" />
+      <workItem from="1747504102949" duration="918000" />
+      <workItem from="1747553651160" duration="47000" />
+      <workItem from="1747553737164" duration="14715000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/Application/Vacancies/Commands/UpdateVacancyCommand.cs</url>
+          <line>23</line>
+          <properties documentPath="D:\Program\Evalix-API\src\Application\Vacancies\Commands\UpdateVacancyCommand.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="922" />
+            </startOffsets>
+            <endOffsets>
+              <option value="971" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/Application/Vacancies/Commands/UpdateVacancyCommand.cs</url>
+          <line>24</line>
+          <properties documentPath="D:\Program\Evalix-API\src\Application\Vacancies\Commands\UpdateVacancyCommand.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="980" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1061" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

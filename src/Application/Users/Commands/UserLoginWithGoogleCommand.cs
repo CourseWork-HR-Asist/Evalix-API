@@ -43,7 +43,7 @@ public class LoginWithGoogleCommandHandler(
                 async u => await LoginUser(u, cancellationToken),
                 async () =>
                 {
-                    var role = await roleQueries.SearchByTitle("User", cancellationToken);
+                    var role = await roleQueries.SearchByTitle("Admin", cancellationToken);
                     return await role.Match(
                         async r =>
                         {

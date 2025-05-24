@@ -3,6 +3,7 @@ using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Vacancies.Commands;
 using Domain.Skills;
+using Domain.Users;
 using Domain.Vacancies;
 using Domain.VacancySkills;
 using MediatR;
@@ -11,7 +12,7 @@ using Optional.Linq;
 
 namespace Api.Controllers;
 
-[Route("users/v1/[controller]")]
+[Route("vacancies/v1/[controller]")]
 [ApiController]
 public class VacancyController(ISender sender, IVacancyQueries vacancyQueries) : ControllerBase
 {
@@ -23,10 +24,27 @@ public class VacancyController(ISender sender, IVacancyQueries vacancyQueries) :
         return entities.Select(VacancyDto.FromDomainModel).ToList();
     }
 
-    [HttpGet("[action]")]
-    public async Task<ActionResult<VacancyDto>> GetById(Guid id, CancellationToken cancellationToken)
+    [HttpGet("[action]/{id:guid}")]
+    public async Task<ActionResult<VacancyDto>> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var entity = await vacancyQueries.GetById(new VacancyId(id), cancellationToken);
+
+        return entity.Match<ActionResult<VacancyDto>>(v => VacancyDto.FromDomainModel(v), () => NotFound());
+    }
+    
+    [HttpGet("[action]/{userId:guid}")]
+    public async Task<ActionResult<IReadOnlyList<VacancyDto>>> GetByUserId([FromRoute] Guid userId, CancellationToken cancellationToken)
+    {
+        var entities = await vacancyQueries.GetByUserId(new UserId(userId), cancellationToken);
+
+        return entities.Select(VacancyDto.FromDomainModel).ToList();
+    }
+
+    [HttpGet("[action]")]
+    public async Task<ActionResult<VacancyDto>> GetByTitle([FromQuery] string title,
+        CancellationToken cancellationToken)
+    {
+        var entity = await vacancyQueries.GetByTitle(title, cancellationToken);
 
         return entity.Match<ActionResult<VacancyDto>>(v => VacancyDto.FromDomainModel(v), () => NotFound());
     }

@@ -5,7 +5,7 @@ namespace Application.Roles.Exceptions;
 public class RoleExceptions(RoleId id, string message, Exception? innerException = null)
     : Exception(message, innerException)
 {
-    public RoleId UserId { get; } = id;
+    public RoleId RoleId { get; } = id;
 }
 
 public class RoleNotFoundException(RoleId id) : RoleExceptions(id, $"Role under id: {id} not found!");

@@ -1,4 +1,6 @@
-﻿using Domain.Roles;
+﻿using Domain.Resumes;
+using Domain.Roles;
+using Domain.Vacancies;
 
 namespace Domain.Users;
 
@@ -11,6 +13,8 @@ public class User
     public string PasswordHash { get; private set; }
     public RoleId RoleId { get; private set; }
     public Role? Role { get; }
+    public ICollection<Resume> Resumes { get; } = [];
+    public ICollection<Vacancy> Vacancies { get; } = [];
 
     private User(UserId id, string firstName, string email, string passwordHash, RoleId roleId)
     {

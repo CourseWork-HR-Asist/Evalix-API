@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250515091609_fixVacancySkill")]
-    partial class fixVacancySkill
+    [Migration("20250524151957_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,13 +116,25 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnName("created_at")
                         .HasDefaultValueSql("timezone('utc', now())");
 
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("file_name");
+
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("varchar(255)")
                         .HasColumnName("url");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id")
                         .HasName("pk_resumes");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_resumes_user_id");
 
                     b.ToTable("resumes", (string)null);
                 });
@@ -254,11 +266,18 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("title");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id")
                         .HasName("pk_vacancies");
 
                     b.HasIndex("RecruiterId")
                         .HasDatabaseName("ix_vacancies_recruiter_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_vacancies_user_id");
 
                     b.ToTable("vacancies", (string)null);
                 });
@@ -341,6 +360,18 @@ namespace Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Resumes.Resume", b =>
+                {
+                    b.HasOne("Domain.Users.User", "User")
+                        .WithMany("Resumes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_resumes_users_id");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Users.User", b =>
                 {
                     b.HasOne("Domain.Roles.Role", "Role")
@@ -362,6 +393,11 @@ namespace Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_vacancies_users_id");
 
+                    b.HasOne("Domain.Users.User", null)
+                        .WithMany("Vacancies")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_vacancies_users_user_id");
+
                     b.Navigation("Recruiter");
                 });
 
@@ -377,7 +413,7 @@ namespace Infrastructure.Persistence.Migrations
                     b.HasOne("Domain.Vacancies.Vacancy", "Vacancy")
                         .WithMany("VacancySkills")
                         .HasForeignKey("VacancyId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_vacancy_skills_vacancy_id");
 
@@ -389,6 +425,13 @@ namespace Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Domain.Resumes.Resume", b =>
                 {
                     b.Navigation("Evaluations");
+                });
+
+            modelBuilder.Entity("Domain.Users.User", b =>
+                {
+                    b.Navigation("Resumes");
+
+                    b.Navigation("Vacancies");
                 });
 
             modelBuilder.Entity("Domain.Vacancies.Vacancy", b =>

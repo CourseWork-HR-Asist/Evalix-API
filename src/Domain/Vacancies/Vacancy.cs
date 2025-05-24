@@ -39,4 +39,18 @@ public class Vacancy
         Experience = requiredExperience;
         Education = requiredEducation;
     }
+    
+    public string ToLLMString()
+    {
+        var skills = string.Join(", ", VacancySkills.Select(vs =>
+            $"{vs.Skill?.Title} (Level: {vs.Level}, Experience: {vs.Experience} years)"));
+
+        return
+            $"Vacancy Title: {Title}\n" +
+            $"Description: {Description}\n" +
+            $"Required Experience: {Experience}\n" +
+            $"Required Education: {Education}\n" +
+            $"Required Skills: {skills}\n" +
+            $"Created At: {CreatedAt:yyyy-MM-dd}";
+    }
 }

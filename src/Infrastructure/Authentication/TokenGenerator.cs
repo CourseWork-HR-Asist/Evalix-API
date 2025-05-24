@@ -38,7 +38,7 @@ public class TokenGenerator : ITokenGenerator
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddHours(1),
+            Expires = DateTime.UtcNow.AddHours(5),
             Issuer = _jwtIssuer,
             Audience = _jwtAudience,
             SigningCredentials =

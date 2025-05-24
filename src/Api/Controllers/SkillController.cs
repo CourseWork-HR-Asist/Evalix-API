@@ -56,7 +56,6 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
 
         return result.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), e => e.ToObjectResult());
     }
-vacancy
     
     [HttpDelete("[action]/{skillid:guid}")] 
     public async Task<ActionResult<SkillDto>> Delete([FromRoute] Guid skillId, CancellationToken cancellationToken)

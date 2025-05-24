@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Domain.Resumes;
+using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Optional;
 
@@ -49,5 +50,13 @@ public class ResumeRepository(ApplicationDbContext context) : IResumeRepository,
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         return resume == null ? Option.None<Resume>() : Option.Some(resume);
+    }
+
+    public async Task<IReadOnlyList<Resume>> GetByUserId(UserId userId, CancellationToken cancellationToken)
+    {
+        return await context.Resumes
+            .AsNoTracking()
+            .Where(x => x.UserId == userId)
+            .ToListAsync(cancellationToken);
     }
 }

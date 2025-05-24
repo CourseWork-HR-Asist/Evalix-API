@@ -1,4 +1,7 @@
 ﻿using System.Reflection;
+using Amazon.Extensions.NETCore.Setup;
+using Amazon.S3;
+using Application.Services.S3;
 using Application.Common.Behaviours;
 using Application.Services.Interfaces;
 using Application.Services.LLM;
@@ -28,6 +31,15 @@ public static class ConfigureApplication
             var llmSettings = servicePorovider.GetRequiredService<LLMSetting>();
             client.BaseAddress = new Uri(llmSettings.Url);
         });
+        
+        services.AddDefaultAWSOptions(new AWSOptions
+        {
+            Region = Amazon.RegionEndpoint.EUCentral1
+        });
+        services.AddAWSService<IAmazonS3>();
+        
+        services.AddScoped<IS3FileService, S3FileService>();
+
     }
 
     private static void AddSettings(this IServiceCollection services, IConfiguration configuration)

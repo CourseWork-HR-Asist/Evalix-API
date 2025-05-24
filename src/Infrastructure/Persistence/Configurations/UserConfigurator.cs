@@ -26,5 +26,19 @@ public class UserConfigurator: IEntityTypeConfiguration<User>
             .HasForeignKey(x => x.RoleId)
             .HasConstraintName("fk_users_roles_id")
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(x => x.Resumes)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId)
+            .HasConstraintName("fk_resumes_users_id")
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.HasMany(x => x.Vacancies)
+            .WithOne(x => x.Recruiter)
+            .HasForeignKey(x => x.RecruiterId)
+            .HasPrincipalKey(x => x.Id)
+            .HasConstraintName("fk_vacancies_users_id")
+            .OnDelete(DeleteBehavior.Cascade);
+
     }
 }

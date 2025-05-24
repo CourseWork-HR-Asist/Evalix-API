@@ -40,6 +40,7 @@ public class ResumeRepository(ApplicationDbContext context) : IResumeRepository,
     {
         return await context.Resumes
             .AsNoTracking()
+            .Include(x => x.User)
             .ToListAsync(cancellationToken);
     }
 
@@ -47,6 +48,7 @@ public class ResumeRepository(ApplicationDbContext context) : IResumeRepository,
     {
         var resume = await context.Resumes
             .AsNoTracking()
+            .Include(x => x.User)
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         return resume == null ? Option.None<Resume>() : Option.Some(resume);

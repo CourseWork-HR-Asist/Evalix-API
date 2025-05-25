@@ -4,6 +4,9 @@ namespace Application.Services.Interfaces;
 
 public interface ILLMService
 {
-    Task<LLMResponse> ExtractSkillsAsync(string query);
-    Task<LLMResponse> ExtractSkillsFromPdfAsync(Stream pdfStream, string fileName);
+    Task<LLMExtractResponse> ExtractSkillsAsync(string query);
+    Task<LLMExtractResponse> ExtractSkillsFromPdfAsync(Stream pdfStream, string fileName);
+    Task<LLMMatchReponse> MatchRequirementsAsync(string resume, string requirement);
+    Task<LLMMatchReponse> MatchRequirementsFromPdfAsync(Stream pdfStream, string fileName, string requirement);
+    Task<LLMSummaryResponse> SummarizeResumeAsync(Stream pdfStream, string fileName);
 }

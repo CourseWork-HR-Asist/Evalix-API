@@ -26,11 +26,8 @@ public record EvaluationDto(Guid? Id,
 } 
 
 public record EvaluationCreateDto(
-    string? Comment,
-    string? Score,
-    Guid? ResumeId,
-    Guid? VacancyId,
-    Guid? StatusId);
+    Guid ResumeId,
+    Guid VacancyId);
     
 public record EvaluationUpdateDto(
     string? Comment,

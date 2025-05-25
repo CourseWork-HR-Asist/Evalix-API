@@ -8,6 +8,6 @@ public class CreateEvaluationCommandValidator: AbstractValidator<CreateEvaluatio
     {
         RuleFor(x => x.VacancyId).NotEmpty();
         RuleFor(x => x.ResumeId).NotEmpty();
-        RuleFor(x => x.StatusId).NotEmpty();
+
     }
 }

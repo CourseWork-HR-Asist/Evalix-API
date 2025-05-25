@@ -49,14 +49,13 @@ public class EvaluationController(ISender sender, IEvaluationQueries evaluationQ
     }
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<EvaluationDto>> Create([FromBody] CreateEvaluationCommand command,
+    public async Task<ActionResult<EvaluationDto>> Create([FromBody] EvaluationCreateDto request,
         CancellationToken cancellationToken)
     {
         var input = new CreateEvaluationCommand
         {
-            ResumeId = command.ResumeId,
-            VacancyId = command.VacancyId,
-            StatusId = command.StatusId
+            ResumeId = request.ResumeId,
+            VacancyId = request.VacancyId
         };
 
         var result = await sender.Send(input, cancellationToken);

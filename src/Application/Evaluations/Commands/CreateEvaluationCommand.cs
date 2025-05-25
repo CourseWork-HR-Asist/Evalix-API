@@ -15,7 +15,6 @@ public class CreateEvaluationCommand: IRequest<Result<Evaluation, EvaluationExce
 {
     public required Guid VacancyId { get; init; }
     public required Guid ResumeId { get; init; }
-    public required Guid StatusId { get; init; }
 }
 
 public class CreateEvaluationCommandHandler(
@@ -32,7 +31,6 @@ public class CreateEvaluationCommandHandler(
     {
         var vacancyId = new VacancyId(request.VacancyId);
         var resumeId = new ResumeId(request.ResumeId);
-        var statusId = new StatusId(request.StatusId);
 
         var existingVacancy = await vacancyQueries.GetById(vacancyId, cancellationToken);
 
@@ -44,12 +42,12 @@ public class CreateEvaluationCommandHandler(
                 return await existingResume.Match<Task<Result<Evaluation, EvaluationExceptions>>>(
                     async r =>
                     {
-                        var existingStatus = await statusQueries.GetById(statusId, cancellationToken);
+                        var existingStatus = await statusQueries.GetByTitle("Analyzed", cancellationToken);
 
                         return await existingStatus.Match<Task<Result<Evaluation, EvaluationExceptions>>>(
-                            async s => await CreateEntity(statusId, v, r, cancellationToken),
+                            async s => await CreateEntity(s.Id, v, r, cancellationToken),
                             () => Task.FromResult<Result<Evaluation, EvaluationExceptions>>(
-                                new EvaluationStatusNotFoundException(statusId))
+                                new EvaluationStatusNotFoundException(StatusId.Empty()))
                         );
                     },
                     () => Task.FromResult<Result<Evaluation, EvaluationExceptions>>(

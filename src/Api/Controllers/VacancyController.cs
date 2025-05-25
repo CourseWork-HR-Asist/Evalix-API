@@ -73,8 +73,8 @@ public class VacancyController(ISender sender, IVacancyQueries vacancyQueries) :
         return result.Match<ActionResult<VacancyWithoutSkillsDto>>(v => VacancyWithoutSkillsDto.FromDomainModel(v), e => e.ToObjectResult());
     }
     
-    [HttpDelete("[action]")]
-    public async Task<ActionResult<VacancyDto>> Delete(Guid id, CancellationToken cancellationToken)
+    [HttpDelete("[action]/{id:guid}")]
+    public async Task<ActionResult<VacancyDto>> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var input = new DeleteVacancyCommand
         {

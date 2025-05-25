@@ -70,12 +70,15 @@ public class CreateEvaluationCommandHandler(
             
             var cvFile = await s3FileService.DownloadAsync(resume.FileName, cancellationToken);
             
-            var entity = Evaluation.New(EvaluationId.New(), vacancy.Id, resume.Id, statusId, "it is my comment", "it is my score");
+            var score = await llmService.MatchRequirementsFromPdfAsync(cvFile, resume.FileName, llmString);
+            
+            var entity = Evaluation.New(EvaluationId.New(), vacancy.Id, resume.Id, statusId, score.SummaryEn, score.MatchScore);
             
             return await evaluationRepository.Add(entity, cancellationToken);
         }
         catch (Exception exception)
         {
+            Console.WriteLine(exception);
             return new EvaluationUnknownException(EvaluationId.Empty(), exception);
         }
     }

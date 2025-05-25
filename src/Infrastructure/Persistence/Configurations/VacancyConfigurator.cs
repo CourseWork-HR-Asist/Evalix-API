@@ -14,7 +14,7 @@ public class VacancyConfigurator: IEntityTypeConfiguration<Vacancy>
         builder.Property(x => x.Id).HasConversion(x => x.Value, x => new VacancyId(x));
         
         builder.Property(x => x.Title).IsRequired().HasColumnType("varchar(255)");
-        builder.Property(x => x.Description).IsRequired().HasColumnType("varchar(255)");
+        builder.Property(x => x.Description).IsRequired().HasColumnType("varchar(1000)");
         builder.Property(x => x.Experience).IsRequired().HasColumnType("varchar(255)");
         builder.Property(x => x.Education).IsRequired().HasColumnType("varchar(255)");
         builder.Property(x => x.RecruiterId).HasConversion(x => x.Value, x => new UserId(x));

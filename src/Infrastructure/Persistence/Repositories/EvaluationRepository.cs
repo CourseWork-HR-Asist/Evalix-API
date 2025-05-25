@@ -48,6 +48,9 @@ public class EvaluationRepository(ApplicationDbContext context): IEvaluationRepo
     {
         var entity = await context.Evaluations
             .AsNoTracking()
+            .Include(x => x.Resume)
+            .Include(x => x.Vacancy)
+            .Include(x => x.Status)
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         
         return entity == null ? Option.None<Evaluation>() : Option.Some(entity);

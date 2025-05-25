@@ -28,6 +28,15 @@ public class VacancySkillRepository(ApplicationDbContext context): IVacancySkill
         return vacancySkill;
     }
 
+    public async Task<VacancySkill> Update(VacancySkill vacancySkill, CancellationToken cancellationToken)
+    {
+        context.VacancySkills.Update(vacancySkill);
+
+        await context.SaveChangesAsync(cancellationToken);
+
+        return vacancySkill;
+    }
+
     public async Task<IReadOnlyList<VacancySkill>> GetAll(CancellationToken cancellationToken)
     {
         return await context.VacancySkills

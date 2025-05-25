@@ -12,7 +12,7 @@ public record VacancyDto(
     Guid? UserId,
     UserDto? User,
     DateTime? CreatedAt,
-    List<SkillDto>? Skills)
+    List<VacancySkillShortDto>? Skills)
 {
     public static VacancyDto FromDomainModel(Vacancy vacancy) => new(
         Id: vacancy.Id.Value,
@@ -23,7 +23,7 @@ public record VacancyDto(
         UserId: vacancy.RecruiterId.Value,
         User: vacancy.Recruiter is null ? null : UserDto.FromDomainModel(vacancy.Recruiter),
         CreatedAt: vacancy.CreatedAt,
-        Skills: vacancy.VacancySkills.Select(x => SkillDto.FromDomainModel(x.Skill)).ToList());
+        Skills: vacancy.VacancySkills.Select(VacancySkillShortDto.FromDomainModel).ToList());
 }
 
 public record VacancyCreateDto(

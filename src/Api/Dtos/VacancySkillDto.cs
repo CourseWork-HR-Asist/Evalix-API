@@ -46,4 +46,22 @@ public record VacancySkillCreateWithVacancyDto(
         );
     }
 }
+
+public record VacancySkillUpdateDto(int Level, int Experience);
+
+
+public record VacancySkillShortDto(
+    Guid? SkillId,
+    string? Title,
+    int Level,
+    int Experience)
+{
+    public static VacancySkillShortDto FromDomainModel(VacancySkill vacancySkill)
+        => new(
+            SkillId: vacancySkill.Skill?.Id.Value,
+            Title: vacancySkill.Skill?.Title,
+            Level: vacancySkill.Level,
+            Experience: vacancySkill.Experience);
+}
+
     

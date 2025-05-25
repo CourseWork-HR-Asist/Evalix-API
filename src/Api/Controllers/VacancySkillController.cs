@@ -30,14 +30,29 @@ public class VacancySkillController(ISender sender, IVacancySkillQueries vacancy
             Level = createVacancySkillDto.Level,
             Experience = createVacancySkillDto.Experience
         };
-        
-        var result = await sender.Send(input, cancellationToken);
-        
-        return result.Match<ActionResult<VacancySkillDto>>(r => VacancySkillDto.FromDomainModel(r), e => e.ToObjectResult());
-    }
-    
-    
 
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<VacancySkillDto>>(r => VacancySkillDto.FromDomainModel(r),
+            e => e.ToObjectResult());
+    }
+
+    [HttpPut("[action]")]
+    public async Task<ActionResult<VacancySkillDto>> Update(Guid vacancySkillId, VacancySkillUpdateDto updateVacancySkillDto,
+        CancellationToken cancellationToken)
+    {
+        var input = new UpdateVacancySkillCommand
+        {
+            Level = updateVacancySkillDto.Level,
+            Experience = updateVacancySkillDto.Experience,
+            Id = vacancySkillId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<VacancySkillDto>>(r => VacancySkillDto.FromDomainModel(r),
+            e => e.ToObjectResult());
+    }
 
     [HttpDelete("[action]/{id:guid}")]
     public async Task<ActionResult<VacancySkillDto>> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -46,9 +61,10 @@ public class VacancySkillController(ISender sender, IVacancySkillQueries vacancy
         {
             VacancySkillId = id
         };
-        
+
         var result = await sender.Send(input, cancellationToken);
-        
-        return result.Match<ActionResult<VacancySkillDto>>(r => VacancySkillDto.FromDomainModel(r), e => e.ToObjectResult());
+
+        return result.Match<ActionResult<VacancySkillDto>>(r => VacancySkillDto.FromDomainModel(r),
+            e => e.ToObjectResult());
     }
 }

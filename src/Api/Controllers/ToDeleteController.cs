@@ -20,5 +20,13 @@ namespace Api.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> TestMethod2([FromForm] IFormFile file)
+        {
+            var response = await lLMService.MatchRequirementsFromPdfAsync(file.OpenReadStream(), file.FileName, "Просто той хто знає мову програмування");
+
+            return Ok(response);
+        }
     }
 }

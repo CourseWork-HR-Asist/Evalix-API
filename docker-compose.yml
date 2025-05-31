@@ -4,7 +4,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: src/Api/Dockerfile
+      dockerfile: Dockerfile
     expose:
       - "80"
     networks:

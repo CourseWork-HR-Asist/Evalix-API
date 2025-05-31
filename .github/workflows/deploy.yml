@@ -9,6 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    environment: Secrets
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3

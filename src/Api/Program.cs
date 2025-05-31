@@ -68,14 +68,11 @@ var app = builder.Build();
 
 app.MapOpenApi();
 
-    if (app.Environment.IsDevelopment())
-    {
-        app.MapScalarApiReference("/", options =>
-        {
-            // Can add UI customization here
-            options.Theme = ScalarTheme.Solarized;
-        });
-    }
+app.MapScalarApiReference("/", options =>
+{
+    // Can add UI customization here
+    options.Theme = ScalarTheme.Solarized;
+});
 
 await app.InitialiseDb();
 

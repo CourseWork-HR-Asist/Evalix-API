@@ -21,7 +21,7 @@ services:
     networks:
       - app-net
 
-nginx:
+  nginx:
     image: nginx:alpine
     ports:
       - "4312:443"

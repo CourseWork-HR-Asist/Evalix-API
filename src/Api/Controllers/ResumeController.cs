@@ -35,7 +35,7 @@ public class ResumeController(ISender sender, IResumeQueries roleQueries) : Cont
         
         await using var stream = resumeFile.OpenReadStream();
         
-        var fileName = $"{Guid.NewGuid()}_{resumeFile.FileName}";
+        var fileName = resumeFile.FileName";
         var contentType = resumeFile.ContentType;
         
         var input = new CreateResumeCommand()

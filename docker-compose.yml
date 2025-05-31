@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "4312:8080"
+    expose:
+      - "8080"
     environment:
       - ConnectionStrings__Default=Server=13.51.206.212;Port=5432;Database=EvalixDevelopment;User Id=postges;Password=KqXtczV9btFSkhcuyhYEw9HVUp4qmkhu;
       - LLM__Url=http://llm-service:8000

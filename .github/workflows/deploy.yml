@@ -32,6 +32,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd ~/evalix-app
-            sudo systemctl stop nginx
             docker-compose down
             docker-compose up --build -d

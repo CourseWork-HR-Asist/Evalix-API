@@ -17,7 +17,7 @@ public class Vacancy
     public ICollection<Evaluation> Evaluations { get; } = [];
     public DateTime CreatedAt { get; private set; }
     
-    private Vacancy(VacancyId id, string title, string description, UserId recruiterId, string experience, string education, DateTime createdAt)
+    private Vacancy(VacancyId id, string title, string description, UserId recruiterId, string experience, string education)
     {
         Id = id;
         Title = title;
@@ -25,12 +25,12 @@ public class Vacancy
         RecruiterId = recruiterId;
         Experience = experience;
         Education = education;
-        CreatedAt = createdAt;
+        CreatedAt = DateTime.UtcNow;
     }
 
     
-    public static Vacancy Create(VacancyId id, string title, string description, UserId recruiterId, string experience, string education, DateTime createdAt)
-        => new(id, title, description, recruiterId, experience, education, createdAt);
+    public static Vacancy New(VacancyId id, string title, string description, UserId recruiterId, string experience, string education)
+        => new(id, title, description, recruiterId, experience, education);
     
     public void UpdateDetails(string title, string description, string requiredExperience, string requiredEducation)
     {
@@ -38,5 +38,19 @@ public class Vacancy
         Description = description;
         Experience = requiredExperience;
         Education = requiredEducation;
+    }
+    
+    public string ToLLMString()
+    {
+        var skills = string.Join(", ", VacancySkills.Select(vs =>
+            $"{vs.Skill?.Title} (Level: {vs.Level}, Experience: {vs.Experience} years)"));
+
+        return
+            $"Vacancy Title: {Title}\n" +
+            $"Description: {Description}\n" +
+            $"Required Experience: {Experience}\n" +
+            $"Required Education: {Education}\n" +
+            $"Required Skills: {skills}\n" +
+            $"Created At: {CreatedAt:yyyy-MM-dd}";
     }
 }

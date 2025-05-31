@@ -26,7 +26,7 @@ public class Evaluation
         Score = score;
     }
     
-    public static Evaluation Create(EvaluationId id, VacancyId vacancyId, ResumeId resumeId, StatusId statusId, string comment, string score)
+    public static Evaluation New(EvaluationId id, VacancyId vacancyId, ResumeId resumeId, StatusId statusId, string comment, string score)
         => new Evaluation(id, vacancyId, resumeId, statusId, comment, score);
     
     public void Update(string comment, string score)

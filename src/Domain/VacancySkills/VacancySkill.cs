@@ -24,4 +24,10 @@ public class VacancySkill
 
     public static VacancySkill New(VacancySkillId id, VacancyId vacancyId, SkillId skillId, int level, int experience) 
         => new(id, vacancyId, skillId, level, experience);
+    
+    public void UpdateDetails(int level, int experience)
+    {
+        Level = level;
+        Experience = experience;
+    }
 }

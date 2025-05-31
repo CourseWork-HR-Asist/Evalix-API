@@ -14,7 +14,7 @@ public class EvaluationConfigurator: IEntityTypeConfiguration<Evaluation>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).HasConversion(x => x.Value, x => new EvaluationId(x));
         
-        builder.Property(x => x.Comment).HasColumnType("varchar(255)");
+        builder.Property(x => x.Comment).HasColumnType("text");
         builder.Property(x => x.Score).HasColumnType("varchar(255)");
         
         builder.Property(x => x.VacancyId).HasConversion(x => x.Value, x => new VacancyId(x));

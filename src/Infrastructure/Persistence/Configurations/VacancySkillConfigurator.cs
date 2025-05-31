@@ -14,10 +14,10 @@ public class VacancySkillConfigurator: IEntityTypeConfiguration<VacancySkill>
         builder.Property(x => x.Id).HasConversion(x => x.Value, x => new VacancySkillId(x));
         
         builder.HasOne(x => x.Vacancy)
-            .WithMany()
+            .WithMany(x => x.VacancySkills)
             .HasForeignKey(x => x.VacancyId)
             .HasConstraintName("fk_vacancy_skills_vacancy_id")
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.HasOne(x => x.Skill)
             .WithMany()

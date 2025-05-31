@@ -30,7 +30,7 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Comment")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("comment");
 
                     b.Property<Guid>("ResumeId")
@@ -65,6 +65,42 @@ namespace Infrastructure.Persistence.Migrations
                     b.ToTable("evaluations", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.RefreshTokens.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("expires");
+
+                    b.Property<bool>("Revoked")
+                        .HasColumnType("boolean")
+                        .HasColumnName("revoked");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("token");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_refresh_tokens");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_refresh_tokens_user_id");
+
+                    b.ToTable("refresh_tokens", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Resumes.Resume", b =>
                 {
                     b.Property<Guid>("Id")
@@ -77,13 +113,25 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnName("created_at")
                         .HasDefaultValueSql("timezone('utc', now())");
 
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("file_name");
+
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("varchar(255)")
                         .HasColumnName("url");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id")
                         .HasName("pk_resumes");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_resumes_user_id");
 
                     b.ToTable("resumes", (string)null);
                 });
@@ -193,7 +241,7 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("varchar(1000)")
                         .HasColumnName("description");
 
                     b.Property<string>("Education")
@@ -215,11 +263,18 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("title");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id")
                         .HasName("pk_vacancies");
 
                     b.HasIndex("RecruiterId")
                         .HasDatabaseName("ix_vacancies_recruiter_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_vacancies_user_id");
 
                     b.ToTable("vacancies", (string)null);
                 });
@@ -248,10 +303,6 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("vacancy_id");
 
-                    b.Property<Guid?>("VacancyId1")
-                        .HasColumnType("uuid")
-                        .HasColumnName("vacancy_id1");
-
                     b.HasKey("Id")
                         .HasName("pk_vacancy_skills");
 
@@ -260,9 +311,6 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.HasIndex("VacancyId")
                         .HasDatabaseName("ix_vacancy_skills_vacancy_id");
-
-                    b.HasIndex("VacancyId1")
-                        .HasDatabaseName("ix_vacancy_skills_vacancy_id1");
 
                     b.ToTable("vacancy_skills", (string)null);
                 });
@@ -297,6 +345,30 @@ namespace Infrastructure.Persistence.Migrations
                     b.Navigation("Vacancy");
                 });
 
+            modelBuilder.Entity("Domain.RefreshTokens.RefreshToken", b =>
+                {
+                    b.HasOne("Domain.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_refresh_tokens_users_id");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Resumes.Resume", b =>
+                {
+                    b.HasOne("Domain.Users.User", "User")
+                        .WithMany("Resumes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_resumes_users_id");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Users.User", b =>
                 {
                     b.HasOne("Domain.Roles.Role", "Role")
@@ -318,6 +390,11 @@ namespace Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_vacancies_users_id");
 
+                    b.HasOne("Domain.Users.User", null)
+                        .WithMany("Vacancies")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_vacancies_users_user_id");
+
                     b.Navigation("Recruiter");
                 });
 
@@ -331,16 +408,11 @@ namespace Infrastructure.Persistence.Migrations
                         .HasConstraintName("fk_vacancy_skills_skill_id");
 
                     b.HasOne("Domain.Vacancies.Vacancy", "Vacancy")
-                        .WithMany()
+                        .WithMany("VacancySkills")
                         .HasForeignKey("VacancyId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_vacancy_skills_vacancy_id");
-
-                    b.HasOne("Domain.Vacancies.Vacancy", null)
-                        .WithMany("VacancySkills")
-                        .HasForeignKey("VacancyId1")
-                        .HasConstraintName("fk_vacancy_skills_vacancies_vacancy_id1");
 
                     b.Navigation("Skill");
 
@@ -350,6 +422,13 @@ namespace Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Domain.Resumes.Resume", b =>
                 {
                     b.Navigation("Evaluations");
+                });
+
+            modelBuilder.Entity("Domain.Users.User", b =>
+                {
+                    b.Navigation("Resumes");
+
+                    b.Navigation("Vacancies");
                 });
 
             modelBuilder.Entity("Domain.Vacancies.Vacancy", b =>

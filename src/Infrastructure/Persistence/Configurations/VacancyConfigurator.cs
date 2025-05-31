@@ -14,7 +14,7 @@ public class VacancyConfigurator: IEntityTypeConfiguration<Vacancy>
         builder.Property(x => x.Id).HasConversion(x => x.Value, x => new VacancyId(x));
         
         builder.Property(x => x.Title).IsRequired().HasColumnType("varchar(255)");
-        builder.Property(x => x.Description).IsRequired().HasColumnType("varchar(255)");
+        builder.Property(x => x.Description).IsRequired().HasColumnType("varchar(1000)");
         builder.Property(x => x.Experience).IsRequired().HasColumnType("varchar(255)");
         builder.Property(x => x.Education).IsRequired().HasColumnType("varchar(255)");
         builder.Property(x => x.RecruiterId).HasConversion(x => x.Value, x => new UserId(x));
@@ -32,7 +32,7 @@ public class VacancyConfigurator: IEntityTypeConfiguration<Vacancy>
             .WithOne(x => x.Vacancy)
             .HasForeignKey(x => x.VacancyId)
             .HasConstraintName("fk_vacancy_skills_vacancy_id")
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.HasMany(x => x.Evaluations)
             .WithOne(x => x.Vacancy)

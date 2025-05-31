@@ -68,6 +68,8 @@ var app = builder.Build();
 
 app.MapOpenApi();
 
+app.UseHttpsRedirection();
+
 app.MapScalarApiReference("/", options =>
 {
     // Can add UI customization here
@@ -79,8 +81,6 @@ await app.InitialiseDb();
 app.MapControllers();
 
 app.UseCors("AllowOrigin");
-
-app.UseHttpsRedirection();
 
 await app.RunAsync();
 

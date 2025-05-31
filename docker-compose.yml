@@ -7,6 +7,17 @@ services:
       dockerfile: Dockerfile
     expose:
       - "80"
+    environment:
+      - ConnectionStrings__Default=Server=13.51.206.212;Port=5432;Database=EvalixDevelopment;User Id=postges;Password=KqXtczV9btFSkhcuyhYEw9HVUp4qmkhu;
+      - LLM__Url=http://llm-service:8000
+      - JwtSecret=LifeIsGoodLifeIsGoodLifeIsGoodLifeIsGoodLifeIsGoodLifeIsGoodLifeIsGoodLifeIsGoodLifeIsGoodLifeIsGood
+      - JwtIssuer=Evalix
+      - JwtAudience=Evalix
+      - Authentication__Google__ClientId=713073505728-l72o8m6cqd3tsu523iahoeidgd7ql5an.apps.googleusercontent.com
+      - Authentication__Google__ClientSecret=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
+      - AWS__Region=eu-central-1
+      - AWS__AccessKey=AKIAVVZPCWZLAPLQIE4W
+      - AWS__SecretKey=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
     networks:
       - app-net
 

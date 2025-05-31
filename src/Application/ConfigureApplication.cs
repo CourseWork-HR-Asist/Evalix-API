@@ -6,6 +6,7 @@ using Amazon.S3;
 using Application.Common.Behaviours;
 using Application.Services.Interfaces;
 using Application.Services.LLM;
+using Application.Services.LLMSettings;
 using Application.Services.S3;
 using FluentValidation;
 using MediatR;
@@ -41,6 +42,8 @@ public static class ConfigureApplication
             var llmSettings = provider.GetRequiredService<LLMSetting>();
             client.BaseAddress = new Uri(llmSettings.Url);
         });
+
+        services.AddSingleton<ILLMSettingsService, LLMSettingsService>();
     }
 
     private static void AddAws(this IServiceCollection services, IConfiguration configuration)

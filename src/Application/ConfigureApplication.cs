@@ -41,6 +41,7 @@ public static class ConfigureApplication
         {
             var llmSettings = provider.GetRequiredService<LLMSetting>();
             client.BaseAddress = new Uri(llmSettings.Url);
+            client.Timeout = TimeSpan.FromMinutes(5);
         });
 
         services.AddSingleton<ILLMSettingsService, LLMSettingsService>();

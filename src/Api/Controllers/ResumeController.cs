@@ -2,6 +2,7 @@
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Resumes.Commands;
+using Domain.Resumes;
 using Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,13 @@ public class ResumeController(ISender sender, IResumeQueries roleQueries) : Cont
 
         return entities.Select(ResumeDto.FromDomainModel).ToList();
     }
+    [HttpGet("[action]/{id:guid}")]
+    public async Task<ActionResult<ResumeDto>> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        var entity = await roleQueries.GetById(new ResumeId(id), cancellationToken);
+
+        return entity.Match<ActionResult<ResumeDto>>(r => ResumeDto.FromDomainModel(r), () => NotFound());
+    }
     
     [HttpGet("[action]/{id:guid}")]
     public async Task<ActionResult<IReadOnlyList<ResumeDto>>> GetByUserId([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -35,7 +43,7 @@ public class ResumeController(ISender sender, IResumeQueries roleQueries) : Cont
         
         await using var stream = resumeFile.OpenReadStream();
         
-        var fileName = $"{Guid.NewGuid()}_{resumeFile.FileName}";
+        var fileName = $"{resumeFile.FileName}";
         var contentType = resumeFile.ContentType;
         
         var input = new CreateResumeCommand()

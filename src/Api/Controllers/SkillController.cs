@@ -21,10 +21,10 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
         return entities.Select(SkillDto.FromDomainModel).ToList();
     }
 
-    [HttpGet("[action]/{skillid:guid}")]
-    public async Task<ActionResult<SkillDto>> GetById([FromRoute] Guid skillid, CancellationToken cancellationToken)
+    [HttpGet("[action]/{skillId:guid}")]
+    public async Task<ActionResult<SkillDto>> GetById([FromRoute] Guid skillId, CancellationToken cancellationToken)
     {
-        var entity = await skillQueries.GetById(new SkillId(skillid), cancellationToken);
+        var entity = await skillQueries.GetById(new SkillId(skillId), cancellationToken);
 
         return entity.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), () => NotFound());
     }
@@ -43,12 +43,12 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
         return result.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), e => e.ToObjectResult());
     }
 
-    [HttpPut("[action]/{skillid:guid}")]
-    public async Task<ActionResult<SkillDto>> Update([FromRoute] Guid skillid, [FromBody] SkillUpdateDto request, CancellationToken cancellationToken)
+    [HttpPut("[action]/{skillId:guid}")]
+    public async Task<ActionResult<SkillDto>> Update([FromRoute] Guid skillId, [FromBody] SkillUpdateDto request, CancellationToken cancellationToken)
     {
         var input = new UpdateSkillCommand
         {
-            SkillId = skillid,
+            SkillId = skillId,
             Title = request.Title
         };
 
@@ -57,7 +57,7 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
         return result.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), e => e.ToObjectResult());
     }
     
-    [HttpDelete("[action]/{skillid:guid}")] 
+    [HttpDelete("[action]/{skillId:guid}")] 
     public async Task<ActionResult<SkillDto>> Delete([FromRoute] Guid skillId, CancellationToken cancellationToken)
     {
         var input = new DeleteSkillCommand

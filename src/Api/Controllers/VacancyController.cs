@@ -86,12 +86,12 @@ public class VacancyController(ISender sender, IVacancyQueries vacancyQueries) :
         return result.Match<ActionResult<VacancyDto>>(r => VacancyDto.FromDomainModel(r), e => e.ToObjectResult());
     }
     
-    [HttpPut("[action]")]
-    public async Task<ActionResult<VacancyDto>> Update(Guid vacancyId, [FromBody] VacancyUpdateDto request, CancellationToken cancellationToken)
+    [HttpPut("[action]/{id:guid}")]
+    public async Task<ActionResult<VacancyDto>> Update([FromRoute] Guid id, [FromBody] VacancyUpdateDto request, CancellationToken cancellationToken)
     {
         var input = new UpdateVacancyCommand
         {
-            VacancyId = vacancyId,
+            VacancyId = id,
             Title = request.Title,
             Description = request.Description,
             Experience = request.Experience,

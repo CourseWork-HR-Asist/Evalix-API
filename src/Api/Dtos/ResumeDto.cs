@@ -6,6 +6,7 @@ public record ResumeDto(
     Guid? Id,
     string? Url,
     string? FileName,
+    string? OriginalFileName,
     DateTime? CreatedAt,
     Guid? UserId,
     UserDto? User
@@ -15,6 +16,7 @@ public record ResumeDto(
         Id: resume.Id.Value,
         Url: resume.Url,
         FileName: resume.FileName,
+        OriginalFileName: resume.OriginalFileName,  
         CreatedAt: resume.CreatedAt,
         UserId: resume.UserId.Value,
         User: resume.User is null ? null : UserDto.FromDomainModel(resume.User));

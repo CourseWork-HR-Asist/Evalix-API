@@ -43,8 +43,9 @@ public class CreateResumeCommandHandler(
     {
         try
         {
-            var url = await s3FileService.UploadAsync(resumeFile, fileName, contentType, cancellationToken);
-            var entity = Resume.New(ResumeId.New(), userId, url, fileName);
+            var fileNameWithGuid = $"{Guid.NewGuid()}_{fileName}";
+            var url = await s3FileService.UploadAsync(resumeFile, fileNameWithGuid, contentType, cancellationToken);
+            var entity = Resume.New(ResumeId.New(), userId, url, fileNameWithGuid, fileName);
             return await resumeRepository.Add(entity, cancellationToken);
         }
         catch (Exception exception)

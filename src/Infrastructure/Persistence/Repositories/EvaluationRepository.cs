@@ -61,6 +61,9 @@ public class EvaluationRepository(ApplicationDbContext context): IEvaluationRepo
         return await context.Evaluations
             .AsNoTracking()
             .Where(x => x.VacancyId == id)
+            .Include(x => x.Resume)
+            .Include(x => x.Vacancy)
+            .Include(x => x.Status)
             .ToListAsync(cancellationToken);
     }
 
@@ -69,6 +72,9 @@ public class EvaluationRepository(ApplicationDbContext context): IEvaluationRepo
         return await context.Evaluations
             .AsNoTracking()
             .Where(x => x.ResumeId == id)
+            .Include(x => x.Resume)
+            .Include(x => x.Vacancy)
+            .Include(x => x.Status)
             .ToListAsync(cancellationToken);
     }
 }

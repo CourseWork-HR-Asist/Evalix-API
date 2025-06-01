@@ -51,6 +51,7 @@ public record VacancySkillUpdateDto(int Level, int Experience);
 
 
 public record VacancySkillShortDto(
+    Guid Id,
     Guid? SkillId,
     string? Title,
     int Level,
@@ -58,6 +59,7 @@ public record VacancySkillShortDto(
 {
     public static VacancySkillShortDto FromDomainModel(VacancySkill vacancySkill)
         => new(
+            Id: vacancySkill.Id.Value,
             SkillId: vacancySkill.Skill?.Id.Value,
             Title: vacancySkill.Skill?.Title,
             Level: vacancySkill.Level,

@@ -37,15 +37,15 @@ public class VacancySkillController(ISender sender, IVacancySkillQueries vacancy
             e => e.ToObjectResult());
     }
 
-    [HttpPut("[action]")]
-    public async Task<ActionResult<VacancySkillDto>> Update(Guid vacancySkillId, VacancySkillUpdateDto updateVacancySkillDto,
+    [HttpPut("[action]/{id:guid}")]
+    public async Task<ActionResult<VacancySkillDto>> Update([FromRoute] Guid id, VacancySkillUpdateDto updateVacancySkillDto,
         CancellationToken cancellationToken)
     {
         var input = new UpdateVacancySkillCommand
         {
             Level = updateVacancySkillDto.Level,
             Experience = updateVacancySkillDto.Experience,
-            Id = vacancySkillId
+            Id = id
         };
 
         var result = await sender.Send(input, cancellationToken);

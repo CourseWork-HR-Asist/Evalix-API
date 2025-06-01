@@ -22,6 +22,7 @@ public class ResumeConfigurator: IEntityTypeConfiguration<Resume>
         
         builder.Property(x => x.Url).IsRequired().HasColumnType("varchar(255)");
         builder.Property(x => x.FileName).IsRequired().HasColumnType("varchar(255)");
+        builder.Property(x => x.OriginalFileName).IsRequired().HasColumnType("varchar(255)");
         builder.Property(x => x.CreatedAt)
             .HasConversion(new DateTimeUtcConverter())
             .HasDefaultValueSql("timezone('utc', now())");

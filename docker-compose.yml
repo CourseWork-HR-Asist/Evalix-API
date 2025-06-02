@@ -28,7 +28,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - /etc/letsencrypt/live/cursova.domain-oa.click:/etc/letsencrypt/live/cursova.domain-oa.click:ro
+      - /etc/nginx/ssl:/etc/nginx/ssl:ro
     depends_on:
       - api
     networks:

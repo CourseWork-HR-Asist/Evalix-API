@@ -82,11 +82,6 @@ app.MapScalarApiReference("/", options =>
 
     if (!app.Environment.IsDevelopment())
     {
-        options.BaseServerUrl = "https://cursova.domain-oa.click";
-        options.WithBaseServerUrl(options.BaseServerUrl);
-        options.DynamicBaseServerUrl = true;
-        options.ProxyUrl = "https://cursova.domain-oa.click";
-        options.WithProxyUrl(options.ProxyUrl);
         options.AddServer("https://cursova.domain-oa.click", "Default");
     }
 });

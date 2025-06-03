@@ -12,7 +12,6 @@ namespace Api.Controllers;
 
 [Route("skills/v1/[controller]")]
 [ApiController]
-[Authorize(Roles = "Admin")]
 public class SkillController(ISender sender, ISkillQueries skillQueries) : ControllerBase
 {
     
@@ -31,7 +30,7 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
 
         return entity.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), () => NotFound());
     }
-
+    [Authorize(Roles = "Admin")]
     [HttpPost("[action]")]
     public async Task<ActionResult<SkillDto>> Create([FromBody] SkillCreateDto request,
         CancellationToken cancellationToken)
@@ -45,7 +44,7 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
 
         return result.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), e => e.ToObjectResult());
     }
-
+    [Authorize(Roles = "Admin")]
     [HttpPut("[action]/{skillId:guid}")]
     public async Task<ActionResult<SkillDto>> Update([FromRoute] Guid skillId, [FromBody] SkillUpdateDto request, CancellationToken cancellationToken)
     {
@@ -59,7 +58,7 @@ public class SkillController(ISender sender, ISkillQueries skillQueries) : Contr
 
         return result.Match<ActionResult<SkillDto>>(r => SkillDto.FromDomainModel(r), e => e.ToObjectResult());
     }
-    
+    [Authorize(Roles = "Admin")]
     [HttpDelete("[action]/{skillId:guid}")] 
     public async Task<ActionResult<SkillDto>> Delete([FromRoute] Guid skillId, CancellationToken cancellationToken)
     {

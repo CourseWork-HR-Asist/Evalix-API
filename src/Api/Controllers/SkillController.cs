@@ -4,6 +4,7 @@ using Application.Common.Interfaces.Queries;
 using Application.Skills.Commands;
 using Domain.Skills;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -11,8 +12,10 @@ namespace Api.Controllers;
 
 [Route("skills/v1/[controller]")]
 [ApiController]
+[Authorize(Roles = "Admin")]
 public class SkillController(ISender sender, ISkillQueries skillQueries) : ControllerBase
 {
+    
     [HttpGet("[action]")]
     public async Task<ActionResult<IReadOnlyList<SkillDto>>> GetAll(CancellationToken cancellationToken)
     {

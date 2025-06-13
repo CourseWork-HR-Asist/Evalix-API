@@ -59,6 +59,7 @@ public class ResumeRepository(ApplicationDbContext context) : IResumeRepository,
         return await context.Resumes
             .AsNoTracking()
             .Where(x => x.UserId == userId)
+            .Include(x => x.User)
             .ToListAsync(cancellationToken);
     }
 }

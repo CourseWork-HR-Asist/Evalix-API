@@ -8,7 +8,7 @@ public class CreateVacancySkillCommandValidator: AbstractValidator<CreateVacancy
     {
         RuleFor(x => x.VacancyId).NotEmpty();
         RuleFor(x => x.SkillId).NotEmpty();
-        RuleFor(x => x.Experience).NotEmpty().LessThan(50).GreaterThan(0);
+        RuleFor(x => x.Experience).NotEmpty().LessThan(50).GreaterThan(-1);
         RuleFor(x => x.Level).NotEmpty().LessThan(50).GreaterThan(-1);
     }
 }
